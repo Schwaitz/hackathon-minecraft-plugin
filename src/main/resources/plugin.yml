@@ -15,3 +15,9 @@ permissions:
   buildathon.use:
     description: Allow players to use the /buildathon command
     default: op
+  buildathon.adduser:
+    description: Allow players to add a new user to the database
+    default: op
+  buildathon.teams:
+    description: Allow players to get a list of teams and users
+    default: op

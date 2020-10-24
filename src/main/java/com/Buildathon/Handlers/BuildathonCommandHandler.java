@@ -1,6 +1,7 @@
 package com.Buildathon.Handlers;
 
 import com.Buildathon.Buildathon;
+import com.Buildathon.BuildathonGlobals;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -31,15 +32,48 @@ public class BuildathonCommandHandler implements CommandExecutor {
 
                     if (args.length >= 1) {
                         String argument = args[0];
-                        p.sendMessage("You used the /buildathon command with args[0] as " + argument);
+
+
+                        // If player types /buildathon help
+                        if (argument.equalsIgnoreCase("help")) {
+                            plugin.sendHelp(p);
+                        }
+
+                        // If player types /buildathon adduser
+                        else if (argument.equalsIgnoreCase("adduser")) {
+                            if (sender.hasPermission("buildathon.adduser")) {
+                                if (args.length == 3) {
+                                    plugin.ch.addUser(args[1], args[2]);
+                                    plugin.sendInfo(p, "Added new user '" + args[1] + "' to team '" + args[2] + "'");
+                                }
+                                else {
+                                    plugin.sendInfo(p, "Usage: /buildathon adduser [name] [team]");
+                                }
+                            }
+                        }
+
+                        // If player types /buildathon teams
+                        else if (argument.equalsIgnoreCase("teams")) {
+                            if (sender.hasPermission("buildathon.teams")) {
+                                plugin.ch.getTeams(p);
+                            }
+
+                        }
+
+                        // If player types /buildathon <anything not listed above>
+                        else {
+                            plugin.sendHelp(p);
+                        }
+
+
                     }
 
                     else {
-                        p.sendMessage("You just typed /buildathon");
+                        plugin.sendHelp(p);
                     }
                 }
                 else {
-                    p.sendMessage("You don't have permission to use /buildathon");
+                    plugin.sendInfo(p, "You don't have permission to use /buildathon");
                 }
             }
 

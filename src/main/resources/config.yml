@@ -5,6 +5,10 @@
 #
 #
 
-# Example Config Item
 
-example: 5
+
+mysql_user: "Minecraft"
+mysql_pass: "12345"
+mysql_hostname: "localhost"
+mysql_database: "Buildathon"
+mysql_port: 3306
